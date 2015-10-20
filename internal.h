@@ -1,3 +1,9 @@
+#include "iostream"
+#include "stdlib.h"
+#include "conio.h"
+
+using namespace std;
+
 struct Chemical
 {
 	int reagVal;
@@ -14,8 +20,8 @@ private:
 	
 	
 public:
-	Salt() = 0;
-	~Salt() = 0;
+	Salt();
+	~Salt();
 
 /*
 	1. Abstract class
@@ -25,7 +31,7 @@ public:
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class ReagentQueue : public salt
+class ReagentQueue : public Salt
 {
 private:
 	Chemical * front;
@@ -33,18 +39,22 @@ private:
 	Chemical * trav;
 
 public:
+	
+	int num; //counts number of reagents in queue
+
 	ReagentQueue()
 	{
-		front = nullptr;
-		rear = nullptr;
-		trav = nullptr;
+		front = NULL;
+		rear = NULL;
+		trav = NULL;
 	}
 
 	~ReagentQueue();
 
 	void add();
+	void input();
 	void del();
-	void traverse();
+	int traverse();
 /*
 	1. Consists of general implementation of linked list queue with operations such as add, delete and traverse.
 	2. It is used to hold a list of type 'Chemical' which serves as a list of reagents
@@ -54,6 +64,7 @@ public:
 void ReagentQueue::add()
 {
 	Chemical *np = new Chemical;
+
 	if(np == NULL)
 	{
 		cout<<"No memory";
@@ -61,60 +72,55 @@ void ReagentQueue::add()
 	}
 
 	np->link = NULL;
-	input(np);
+	
+		input();
 	
 	if(front == NULL)
 	{
 		front = np;
 		rear = np;
 	}
+
 	else
 	{
 		rear->link = np;
 		rear = np;
 	}
+
+	trav = front;
 }
 
 void ReagentQueue::del()
 {
-	cout<<"The following data is going to be deleted\n";
+
 	Chemical *temp = front;
+	
 	front = front->link;
+	
 	delete temp;
+	
 	cout<<"\nChemical deleted\n";
+	
 	getch();
+
 	if(front == rear == NULL)
-	cout<<"Queue empty\n";
+		cout<<"Queue empty\n";
+	
+	trav = front;
 }
 
 int ReagentQueue::traverse()
 {
-	Chemical *trav;
-	
-	trav=front;
+	if(trav -> link != NULL)
+	{
+		trav = trav->link;
+		return trav->reagVal;
+		trav=trav->link;
+	}
 
-	trav->rev=trav->link;
-	return Chemical.reagVal;
-	trav=trav->link;
-
-	getch();
+	else 
+		trav = front;
 }
-
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-class ChemicalTests
-{
-public:
-	ChemicalTests();
-	~ChemicalTests();
-
-	ReagentQueue list;
-
-/*
-	1. Variables for reagents and conditions required 
-	2. Function checkTest() to check if salt will test positively
-*/
-};
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -137,3 +143,22 @@ public:
 };
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+int compareTests(ReagentQueue userQ, ReagentQueue testQ)
+{
+	int count = 0;
+
+	if(userQ.num == testQ.num)
+	{
+		while(userQ.traverse() == testQ.traverse())
+		{
+			count++;
+		}
+
+		if (count == userQ.num)
+			return 1;
+
+		else
+			return 0;
+	}
+}
