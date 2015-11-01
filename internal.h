@@ -1,9 +1,3 @@
-#include "iostream"
-#include "stdlib.h"
-#include "conio.h"
-
-using namespace std;
-
 struct Chemical
 {
 	int reagVal;
@@ -17,21 +11,54 @@ struct Chemical
 class Salt
 {
 private:
-	
-	
+	static int n_Anion;
+	static int n_Cation;
+
 public:
+	
 	Salt();
+	
+	static int GenerateRandomAnion();
+	static int GenerateRandomCation();
+	static char* getAnion(int);
+	static char* getCation(int);
+
 	~Salt();
 
 /*
 	1. Abstract class
-	2. Variable containing cation and anion
+	2. Stores all cation and anions
 */
 };
 
+char* Salt::getAnion(int ANION)
+{
+	return ANIONS[ANION];
+}
+
+char* Salt::getCation(int CATION)
+{
+	return CATIONS[CATION];
+}
+
+int Salt::GenerateRandomAnion()
+{
+	randomize();
+	return random(n_Anion);
+}
+
+int Salt::GenerateRandomCation()
+{
+	randomize();
+	return random(n_Cation);
+}
+
+Salt::n_Cation = 12;
+Salt::n_Anion = 10;
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class ReagentQueue : public Salt
+class ReagentQueue : public salt
 {
 private:
 	Chemical * front;
@@ -39,32 +66,29 @@ private:
 	Chemical * trav;
 
 public:
-	
-	int num; //counts number of reagents in queue
-
 	ReagentQueue()
 	{
-		front = NULL;
-		rear = NULL;
-		trav = NULL;
+		front = nullptr;
+		rear = nullptr;
+		trav = nullptr;
 	}
 
 	~ReagentQueue();
 
 	void add();
-	void input();
 	void del();
-	int traverse();
+	void traverse();
+	void display();
 /*
 	1. Consists of general implementation of linked list queue with operations such as add, delete and traverse.
-	2. It is used to hold a list of type 'Chemical' which serves as a list of reagents
+	2. It is used to hold a list of type 'Chemical' which serves as a list of reagents.
 */
 };
 
 void ReagentQueue::add()
 {
 	Chemical *np = new Chemical;
-
+	
 	if(np == NULL)
 	{
 		cout<<"No memory";
@@ -72,57 +96,77 @@ void ReagentQueue::add()
 	}
 
 	np->link = NULL;
-	
-		input();
+	input(np);
 	
 	if(front == NULL)
 	{
 		front = np;
 		rear = np;
 	}
-
 	else
 	{
 		rear->link = np;
 		rear = np;
 	}
-
-	trav = front;
 }
 
 void ReagentQueue::del()
 {
-
+	cout<<"The following data is going to be deleted\n";
 	Chemical *temp = front;
-	
 	front = front->link;
-	
 	delete temp;
-	
 	cout<<"\nChemical deleted\n";
-	
 	getch();
-
 	if(front == rear == NULL)
-		cout<<"Queue empty\n";
-	
-	trav = front;
+	cout<<"Queue empty\n";
 }
 
 int ReagentQueue::traverse()
 {
-	if(trav -> link != NULL)
-	{
-		trav = trav->link;
-		return trav->reagVal;
-		trav=trav->link;
-	}
+	Chemical *trav;
+	trav=front;
+	trav->rev=trav->link;
+	return Chemical.reagVal;
+	trav=trav->link;
+	getch();
+}
 
-	else 
-		trav = front;
+void ReagentQueue::display()
+{
+	node *trav;
+	trav=front;
+	
+	do
+	{
+		trav->rev=trav->link;
+		display(trav);
+		trav=trav->link;
+	}while(trav!=NULL);
+
+	cout<<"\nRear="<<rear->ctr;
+	cout<<"\nFront="<<front->ctr;
+	
+	getch();
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class ChemicalTests
+{
+public:
+	ChemicalTests();
+	~ChemicalTests();
+
+	ReagentQueue list;
+	void ExecutePrelims();
+/*
+	1. Variables for reagents and conditions required 
+	2. Function checkTest() to check if salt will test positively
+*/
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class User
 {
@@ -134,6 +178,8 @@ private:
 public:
 	User();
 	~User();
+	int obv_num;
+	char observations[100][100];
 	
 /*
 	1. Variables for current salt, successes and failures
@@ -142,6 +188,11 @@ public:
 */
 };
 
+
+User::User()
+{
+	obv_num = 0;
+}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 int compareTests(ReagentQueue userQ, ReagentQueue testQ)
