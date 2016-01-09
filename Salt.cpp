@@ -116,9 +116,9 @@ Chemical* ReagentQueue::getFront()
 
 void input(Chemical *a)
 {
-	cout<<"Enter data: ";
+	cout<<"Enter data (chemical formula or name [eg: Copper Turnings], as specified in manual): ";
 	cin.ignore();
-	gets(a->reagVal);
+	cin.getline(a->reagVal, 50, '\n');
 	cout<<'\n';
 }
 
@@ -146,6 +146,8 @@ void ReagentQueue::add()
 		rear->link=np;
 		rear=np;
 	}
+
+	cout << "Reagent has been added!";
 
 	num++;
 }
