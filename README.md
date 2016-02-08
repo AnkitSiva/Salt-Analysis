@@ -8,4 +8,5 @@ To use:
   4. Once the reagent queue has been filled, choose to execute the test. (Tests that do not return positive will show no change in the observation list)
 
   5. Once a test is done, remove reagents from the reagent queue (repeat until all reagents are removed)
-  6. Practice always helps!
+  6. Repeat from step 2 until ion is confirmed
+  7. Practice always helps!
