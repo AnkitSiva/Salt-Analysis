@@ -9,6 +9,6 @@ To use:
     c. Magnesia Mixture
     d. and so on as detailed in the manual. (You can also refer to the source code to find out the exact reagent names)
 4. Once the reagent queue has been filled, choose to execute the test.
-  a. Tests that do not return positive will show no change in the observation list
+    a. Tests that do not return positive will show no change in the observation list
 5. Once a test is done, remove reagents from the reagent queue (repeat until all reagents are removed)
 6. Practice always helps!
