@@ -610,7 +610,7 @@ void ConfirmBasicRadical(UserModel &VirtUser)
 				strcpy(VirtUser.observations[VirtUser.a++],"Red brown ppt is formed");
 		}
 		else
-			strcpy(VirtUser.observations[VirtUser.a++],"Absence of Zero group!!!");
+			strcpy(VirtUser.observations[VirtUser.a++],"Absence of Zero group!");
 	}
 
 	if((VirtUser.CATION +  1)==1||(VirtUser.CATION +  1)==3||(VirtUser.CATION +  1)==4||(VirtUser.CATION +  1)==5||(VirtUser.CATION +  1)==6||(VirtUser.CATION +  1)==7||(VirtUser.CATION +  1)==8||(VirtUser.CATION +  1)==9||(VirtUser.CATION +  1)==10||(VirtUser.CATION +  1)==11||(VirtUser.CATION +  1)==12)
